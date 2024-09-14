@@ -1,5 +1,4 @@
-extends TileMap
-
+extends TileMapLayer
 
 var chunkSize = 16
 var mapSize = 16
@@ -16,27 +15,27 @@ func loadChunk(mapX, mapY):
 					dic[str(Vector2(x + mapX,y + mapY))] = {
 						"Type": "Heavy Grass"
 						}
-					set_cell(0, Vector2(x + mapX,y + mapY), 1, Vector2i(0,0), 0)
+					set_cell(Vector2(x + mapX,y + mapY), 0, Vector2i(0,0), 0)
 				1:
 					dic[str(Vector2(x + mapX,y + mapY))] = {
 						"Type": "Light Grass"
 						}
-					set_cell(0, Vector2(x + mapX,y + mapY), 1, Vector2i(1,0), 0)
+					set_cell(Vector2(x + mapX,y + mapY), 0, Vector2i(1,0), 0)
 				2:
 					dic[str(Vector2(x + mapX,y + mapY))] = {
 						"Type": "Big Bushes"
 						}
-					set_cell(0, Vector2(x + mapX,y + mapY), 1, Vector2i(2,0), 0)
+					set_cell(Vector2(x + mapX,y + mapY), 0, Vector2i(2,0), 0)
 				3:
 					dic[str(Vector2(x + mapX,y + mapY))] = {
 						"Type": "Small Bushes"
 						}
-					set_cell(0, Vector2(x + mapX,y + mapY), 1, Vector2i(3,0), 0)
+					set_cell(Vector2(x + mapX,y + mapY), 0, Vector2i(3,0), 0)
 				4:
 					dic[str(Vector2(x + mapX,y + mapY))] = {
 						"Type": "Black"
 						}
-					set_cell(0, Vector2(x + mapX,y + mapY), 1, Vector2i(4,0), 0)
+					set_cell(Vector2(x + mapX,y + mapY), 0, Vector2i(4,0), 0)
 
 func _ready():
 	for x in mapSize * 2:
@@ -46,9 +45,3 @@ func _ready():
 			if y > mapSize:
 				y =  (y * -1) % mapSize
 			loadChunk(chunkSize	* x, chunkSize	* y)
-
-func _process(delta):
-	var tile = local_to_map(get_global_mouse_position())
-	
-	if Input.is_action_pressed("left_click"):
-		set_cell(2, tile, 2, Vector2i(0,0), 0)
