@@ -19,6 +19,7 @@ func _process(_delta: float) -> void:
 		speed = sprintSpeed
 	if Input.is_action_just_released("sprint"):
 		speed = walkSpeed
+		
 	look_at(get_global_mouse_position())
 
 func _physics_process(_delta: float) -> void:
@@ -27,4 +28,3 @@ func _physics_process(_delta: float) -> void:
 
 func _on_hot_bar_component_updated_hotbar() -> void:
 	currentBuilding = hotbarComponent.getBuilding()
-	print(currentBuilding)

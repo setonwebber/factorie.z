@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cktbg8lgbi58v"]
+
+[ext_resource type="Texture2D" uid="uid://ho4ys023sncu" path="res://assets/hub.png" id="1_1ryat"]
+[ext_resource type="Script" path="res://entities/components/building_component.gd" id="2_i412t"]
+
+[node name="Hub" type="Sprite2D"]
+texture = ExtResource("1_1ryat")
+
+[node name="BuildingComponent" type="Node" parent="."]
+script = ExtResource("2_i412t")
+buildingSize = 2
+buildingPath = "res://entities/hub/hub_1/hub.tscn"
+buildingType = "Hub"
+buildingTier = 1

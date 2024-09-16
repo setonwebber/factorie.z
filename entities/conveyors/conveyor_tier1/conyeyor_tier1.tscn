@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwxytda6vx01i"]
+
+[ext_resource type="Texture2D" uid="uid://c1vp0vksxkmto" path="res://assets/conveyor.png" id="1_sojpk"]
+[ext_resource type="Script" path="res://entities/components/building_component.gd" id="2_c3um8"]
+
+[node name="conyeyor_tier1" type="Sprite2D"]
+texture = ExtResource("1_sojpk")
+
+[node name="BuildingComponent" type="Node" parent="."]
+script = ExtResource("2_c3um8")
+buildingSize = 1
+buildingType = "Conveyor"
+buildingTier = 1
