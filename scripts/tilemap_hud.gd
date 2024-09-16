@@ -9,3 +9,7 @@ func _process(_delta: float) -> void:
 		erase_cell(tileBuffer)
 		tileBuffer = tile
 		set_cell(tile, 0, Vector2i(0,0), 0)
+
+#func _on_buildings_placed_building(occupiedTiles) -> void:
+	#for tile in occupiedTiles:
+		#set_cell(tile, 0, Vector2i(0,0), 0)

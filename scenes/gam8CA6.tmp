@@ -66,3 +66,5 @@ script = ExtResource("5_s4kff")
 script = ExtResource("9_eoawq")
 
 [connection signal="placedBuilding" from="buildings" to="hud" method="_on_buildings_placed_building"]
+[connection signal="updatedHotbar" from="player/HotBarComponent" to="buildings" method="_on_hot_bar_component_updated_hotbar"]
+[connection signal="updatedHotbar" from="player/HotBarComponent" to="player" method="_on_hot_bar_component_updated_hotbar"]

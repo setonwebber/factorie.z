@@ -59,10 +59,13 @@ tile_set = SubResource("TileSet_mdj6x")
 rendering_quadrant_size = 64
 script = ExtResource("5_prkwn")
 
-[node name="player" parent="." instance=ExtResource("4_r708o")]
+[node name="player" parent="." node_paths=PackedStringArray("hotbarComponent") instance=ExtResource("4_r708o")]
 script = ExtResource("5_s4kff")
+hotbarComponent = NodePath("HotBarComponent")
 
 [node name="HotBarComponent" type="Node" parent="player"]
 script = ExtResource("9_eoawq")
 
 [connection signal="placedBuilding" from="buildings" to="hud" method="_on_buildings_placed_building"]
+[connection signal="updatedHotbar" from="player/HotBarComponent" to="buildings" method="_on_hot_bar_component_updated_hotbar"]
+[connection signal="updatedHotbar" from="player/HotBarComponent" to="player" method="_on_hot_bar_component_updated_hotbar"]

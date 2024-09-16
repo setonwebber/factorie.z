@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://by3uli27rxc3m"]
+
+[ext_resource type="Texture2D" uid="uid://bem6gxdxeatnv" path="res://assets/miner.png" id="1_h7bl2"]
+[ext_resource type="Script" path="res://entities/miners/miner_tier1/miner_tier_1.gd" id="2_k1b4p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hk2hu"]
+size = Vector2(192, 192)
+
+[node name="miner" type="Sprite2D"]
+texture = ExtResource("1_h7bl2")
+script = ExtResource("2_k1b4p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.565, 0)
+shape = SubResource("RectangleShape2D_hk2hu")
