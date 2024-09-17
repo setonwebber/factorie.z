@@ -26,17 +26,24 @@ func _ready() -> void:
 			hotbarObjects.append("null")
 
 func _process(_delta: float) -> void:
-	var building = player.currentBuilding
-	getBuildingDetails(building)
+	getBuildingDetails()
 	var tile = local_to_map(get_global_mouse_position())
-	if Input.is_action_pressed("left_click") and !Functions.checkIfTilesOccupied(tile, buildingSize, occupiedTiles):
+	if Input.is_action_pressed("left_click") and !Global.HUD_SELECTION_OVERBUILDING and !Global.HUD_SELECTION_BUILDINGOVERLAP:
+		print(Global.HUD_SELECTION_BUILDINGOVERLAP)
 		placeBuilding(tile)
 		placedBuilding.emit(occupiedTiles)
+	
+	if Input.is_action_pressed("right_click") and Global.HUD_SELECTION_OVERBUILDING and is_instance_valid(Global.HUD_SELECTION_BUILDING):
+		Global.HUD_SELECTION_BUILDING.queue_free()
 
 func placeBuilding(pos):
 	buildingNumber += 1
-	object.position = pos * gridSize + Vector2i(gridSize / 2, gridSize / 2)
+	if buildingSize % 2 == 0:
+		object.position = pos * gridSize + Vector2i(gridSize, gridSize)
+	else:
+		object.position = pos * gridSize + Vector2i(gridSize / 2, gridSize / 2)
 	object.name = str(buildingType, buildingNumber)
+	updateBuildingDetails()
 	match Global.HUD_SELECTION_ROTATION:
 		"south":
 			object.set_rotation_degrees(0)
@@ -50,12 +57,18 @@ func placeBuilding(pos):
 	buildingDic[str(pos)] = {
 		"Type": buildingType,
 		"Rotation": Global.HUD_SELECTION_ROTATION,
-		"Tier": buildingTier,
-		"Path": "/root/buildings/" + str(object.name)
+		"Tier": buildingTier
 	}
 	add_child(object, true)
 
-func getBuildingDetails(building):
+func updateBuildingDetails():
+	var buildingComponent = object.get_child(0)
+	buildingComponent.buildingPlaced = true
+	buildingComponent.buildingType = buildingType
+	buildingComponent.buildingSize = buildingSize
+	buildingComponent.buildingTier = buildingTier
+
+func getBuildingDetails():
 	object = hotbarObjects[Global.HUD_HOTBAR_CURRENTID].instantiate()
 	var buildingComponent = object.get_child(0)
 	buildingType = buildingComponent.buildingType
