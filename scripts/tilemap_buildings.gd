@@ -27,21 +27,32 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	getBuildingDetails()
-	var tile = local_to_map(get_global_mouse_position())
-	if Input.is_action_pressed("left_click") and !Global.HUD_SELECTION_OVERBUILDING and !Global.HUD_SELECTION_BUILDINGOVERLAP:
-		print(Global.HUD_SELECTION_BUILDINGOVERLAP)
+	var tile = Vector2(local_to_map(get_global_mouse_position()))
+	
+	if Input.is_action_pressed("left_click") and !Global.HUD_SELECTION_OVERBUILDING and !Functions.checkIfTilesOccupied(tile, buildingSize, occupiedTiles)[0]:
 		placeBuilding(tile)
 		placedBuilding.emit(occupiedTiles)
+		for tileBuf in Functions.checkIfTilesOccupied(tile, buildingSize, occupiedTiles)[1]:
+			occupiedTiles.append(tileBuf)
 	
 	if Input.is_action_pressed("right_click") and Global.HUD_SELECTION_OVERBUILDING and is_instance_valid(Global.HUD_SELECTION_BUILDING):
 		Global.HUD_SELECTION_BUILDING.queue_free()
+		var pos
+		if buildingSize % 2 == 0:
+			pos = (Global.HUD_SELECTION_BUILDING.position - Vector2(gridSize, gridSize)) / gridSize 
+		else:
+			pos = (Global.HUD_SELECTION_BUILDING.position - Vector2(gridSize / 2, gridSize / 2)) / gridSize 
+		
+		for tileBuf in Functions.checkIfTilesOccupied(pos, buildingSize, occupiedTiles)[1]:
+			occupiedTiles.erase(tileBuf)
+		Global.HUD_SELECTION_OVERBUILDING = false
 
 func placeBuilding(pos):
 	buildingNumber += 1
 	if buildingSize % 2 == 0:
-		object.position = pos * gridSize + Vector2i(gridSize, gridSize)
+		object.position = pos * gridSize + Vector2(gridSize, gridSize)
 	else:
-		object.position = pos * gridSize + Vector2i(gridSize / 2, gridSize / 2)
+		object.position = pos * gridSize + Vector2(gridSize / 2, gridSize / 2)
 	object.name = str(buildingType, buildingNumber)
 	updateBuildingDetails()
 	match Global.HUD_SELECTION_ROTATION:

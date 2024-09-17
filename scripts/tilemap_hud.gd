@@ -4,8 +4,8 @@ var gridSize := Global.GRIDSIZE
 @onready var player := $"/root/game/player"
 
 var object
-var tileBuffer := Vector2i(0, 0)
-var tile: Vector2i
+var tileBuffer := Vector2(0, 0)
+var tile: Vector2
 
 var building
 var selection_updated = false
@@ -30,7 +30,7 @@ func _process(_delta: float) -> void:
 
 		#erase_cell(tileBuffer)
 		#tileBuffer = tile
-		#set_cell(tile, 0, Vector2i(0,0), 0)
+		#set_cell(tile, 0, Vector2(0,0), 0)
 		
 		if object:
 			object.queue_free()
@@ -40,9 +40,9 @@ func _process(_delta: float) -> void:
 func previewBuilding(pos):
 	object = load(building).instantiate()
 	if buildingSize % 2 == 0:
-		object.position = pos * gridSize + Vector2i(gridSize, gridSize)
+		object.position = pos * gridSize + Vector2(gridSize, gridSize)
 	else:
-		object.position = pos * gridSize + Vector2i(gridSize / 2, gridSize / 2)
+		object.position = pos * gridSize + Vector2(gridSize / 2, gridSize / 2)
 	object.name = "preview"
 	object.modulate.a = 0.2
 	match Global.HUD_SELECTION_ROTATION:
@@ -89,4 +89,4 @@ func rotateBuildings():
 
 #func _on_buildings_placed_building(occupiedTiles) -> void:
 	#for tile in occupiedTiles:
-		#set_cell(tile, 0, Vector2i(0,0), 0)
+		#set_cell(tile, 0, Vector2(0,0), 0)

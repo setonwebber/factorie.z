@@ -11,13 +11,6 @@ func _ready() -> void:
 	selectionOverlay.visible = false
 
 func _process(_delta: float) -> void:
-	if has_overlapping_areas():
-		Global.HUD_SELECTION_BUILDINGOVERLAP = true
-		print(Global.HUD_SELECTION_BUILDINGOVERLAP)
-	else:
-		Global.HUD_SELECTION_BUILDINGOVERLAP = false
-	
-	
 	if buildingComponent.buildingPlaced:
 		# check if the mouse is inside the Area2D
 		if get_global_mouse_position().distance_to(global_position) <= Global.GRIDSIZE / 2 * buildingComponent.buildingSize:

@@ -15,27 +15,27 @@ func loadChunk(mapX, mapY):
 					dic[str(Vector2(x + mapX,y + mapY))] = {
 						"Type": "Heavy Grass"
 						}
-					set_cell(Vector2(x + mapX,y + mapY), 0, Vector2i(0,0), 0)
+					set_cell(Vector2(x + mapX,y + mapY), 0, Vector2(0,0), 0)
 				1:
 					dic[str(Vector2(x + mapX,y + mapY))] = {
 						"Type": "Light Grass"
 						}
-					set_cell(Vector2(x + mapX,y + mapY), 0, Vector2i(1,0), 0)
+					set_cell(Vector2(x + mapX,y + mapY), 0, Vector2(1,0), 0)
 				2:
 					dic[str(Vector2(x + mapX,y + mapY))] = {
 						"Type": "Big Bushes"
 						}
-					set_cell(Vector2(x + mapX,y + mapY), 0, Vector2i(2,0), 0)
+					set_cell(Vector2(x + mapX,y + mapY), 0, Vector2(2,0), 0)
 				3:
 					dic[str(Vector2(x + mapX,y + mapY))] = {
 						"Type": "Small Bushes"
 						}
-					set_cell(Vector2(x + mapX,y + mapY), 0, Vector2i(3,0), 0)
+					set_cell(Vector2(x + mapX,y + mapY), 0, Vector2(3,0), 0)
 				4:
 					dic[str(Vector2(x + mapX,y + mapY))] = {
 						"Type": "Black"
 						}
-					set_cell(Vector2(x + mapX,y + mapY), 0, Vector2i(4,0), 0)
+					set_cell(Vector2(x + mapX,y + mapY), 0, Vector2(4,0), 0)
 
 func _ready():
 	for x in mapSize * 2:

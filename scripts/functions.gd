@@ -8,15 +8,11 @@ func checkIfTilesOccupied(tile, buildingSize, occupiedTiles):
 			for y in buildingSize:
 				if y > buildingSize / 2:
 					y =  (y * -1) % buildingSize / 2
-				currentTile = tile + Vector2i(x, y)
+				currentTile = tile + Vector2(x, y)
 				occupiedTilesBuffer.append(currentTile)
 	
 	for tileBuf in occupiedTilesBuffer:
 		if occupiedTiles.has(tileBuf):
-			return true
+			return [true, occupiedTilesBuffer]
 	
-	for tileBuf in occupiedTilesBuffer:
-		occupiedTiles.append(tileBuf)
-		
-	occupiedTilesBuffer.clear()
-	return false
+	return [false, occupiedTilesBuffer]
